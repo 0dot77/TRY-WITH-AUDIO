@@ -17,7 +17,12 @@ const pannerControl = document.querySelector('.panner');
 const track = audioContext.createMediaElementSource(audioElement);
 track.connect(panner).connect(audioContext.destination);
 
+const btnContainer = document.querySelector('.btn-container');
 const playBtn = document.querySelector('.btn');
+const playBtnText = document.querySelector('.btn-text');
+const video = document.querySelector('.btn-container__video');
+const mainLink = document.querySelector('.go-main');
+
 playBtn.addEventListener(
   'click',
   function () {
@@ -29,17 +34,26 @@ playBtn.addEventListener(
     if (this.dataset.playing === 'false') {
       audioElement.play();
       this.dataset.playing = 'true';
-      playBtn.classList.add('btn-grow');
-      playBtn.classList.remove('btn-reduce');
+      btnContainer.classList.add('btn-grow');
+      btnContainer.classList.remove('btn-reduce');
       pannerControl.classList.remove('hidden');
       pannerControl.classList.add('reveal');
+      playBtnText.classList.add('btn-shaking');
+      mainLink.style.color = '#ffffff';
     } else if (this.dataset.playing === 'true') {
       audioElement.pause();
       this.dataset.playing = 'false';
-      playBtn.classList.remove('btn-grow');
-      playBtn.classList.add('btn-reduce');
+      btnContainer.classList.remove('btn-grow');
+      btnContainer.classList.add('btn-reduce');
       pannerControl.classList.add('hidden');
       pannerControl.classList.remove('reveal');
+      playBtnText.classList.remove('btn-shaking');
+      mainLink.style.color = '#000000';
+
+      //video style 원래대로
+      video.style.left = 0;
+      video.style.right = 0;
+      pannerControl.value = 0;
     }
   },
   false
@@ -52,11 +66,18 @@ audioElement.addEventListener(
   },
   false
 );
+
 // Panner
 pannerControl.addEventListener(
   'input',
   function () {
     panner.pan.value = this.value;
+    if (this.value < 0) {
+      video.style.left = `${Math.abs(this.value) * 50}%`;
+      console.log(video.style.left);
+    } else if (this.value > 0) {
+      video.style.right = `${Math.abs(this.value) * 50}%`;
+    }
   },
   false
 );

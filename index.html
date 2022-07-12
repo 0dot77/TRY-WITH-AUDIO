@@ -6,11 +6,17 @@
     <title>TRY WITH AUDIO</title>
   </head>
   <body>
-    <div id="app">
+    <main class="main-container">
       <section class="menu-section">
         <a class="try-1" href="/pages/mouse.html">AUDIO WITH MOUSE</a>
       </section>
-    </div>
+      <section class="contents-section">
+        <video class="try-1__video hidden" playsinline autoplay muted loop>
+          <source src="./movies/mouse-1.mov" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      </section>
+    </main>
     <script type="module" src="/scripts/main.js"></script>
   </body>
 </html>

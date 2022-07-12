@@ -128,17 +128,37 @@ table {
   border-spacing: 0;
 }
 
-#app {
-  display: grid;
-  grid-template-columns: 30% 90%;
+body {
+  width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  width: 100%;
+  height: 100%;
 }
 
 .menu-section {
-  border: 1px solid red;
-  width: 100%;
-  height: 100%;
   grid-column: 1/2;
   text-align: center;
   padding: 1rem;
+}
+
+.contents-section {
+  grid-column: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.try-1__video {
+  object-fit: cover;
+  width: 100%;
+  height: inherit;
+}
+
+.hidden {
+  display: none;
 }
